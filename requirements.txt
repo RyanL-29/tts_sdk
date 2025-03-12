@@ -1,0 +1,4 @@
+edge_tts
+nuitka
+pydub
+pyaudio

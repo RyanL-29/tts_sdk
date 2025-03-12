@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tts_sdk.py",
+            "console": "integratedTerminal",
+            "args": [
+                "en-US",
+                "The sadness and grief caused by the death of a relative or friend is beyond words. Our hospital would like to extend our deep condolences to you. If you have any questions about the cause of death of a relative or friend, please feel free to check with the ward medical staff. The following provides relevant information for death registration, hoping to assist you in handling related matters.   To register a death:  Go to our hospital to apply for a  Medical Certificate of Cause of Death  (Form 18)  Address: Registration and Death Registration Office, 2nd Floor, Basement, Kwong Wah Hospital, 25 Waterloo Road, Yau Ma Tei, Kowloon, Hong Kong. If you choose cremation, you should also apply for a Medical Certificate (Cremation) (Form 2)   Required documents: Original ID card of the deceased, original ID card of the applicant and this sympathy card   Office hours: Monday to Friday 8:45 am to 1:00 pm   2:00pm to 5:30pm    Closed on Saturdays, Sundays and public holidays   Tel: 4 6 5 8 2 8 2 1   Claim the remains:  1. Please call the Registration and Death Registration Office of our hospital (Tel: 4658 6194) to make an appointment to collect the body.  2. Bring the identity card of the deceased, the identity card of the person claiming the body, the certificate for claiming the body and the \"\"Death Registration Certificate\"\" (Form 12) on the agreed date and time to the Anning Pavilion of our hospital (2nd floor, basement of the new hospital building) ) to claim the remains of their loved ones.  3. After the applicant and the funeral practitioner confirm that the procedures are completed, arrangements can be made to transfer the body out of the hospital."
+            ]
+        }
+    ]
+}
