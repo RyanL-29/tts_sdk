@@ -16,6 +16,7 @@ class PlaySound:
     
     def play_stream(self, voice_clips: Generator[Dict[str, Any], None, None]):
         buffer = io.BytesIO()
+        full_audio_buffer = io.BytesIO()
         segment_duration_ms = 3000
         stream = None
         p = pyaudio.PyAudio()
@@ -24,6 +25,7 @@ class PlaySound:
             for message in voice_clips:
                 if message["type"] == "audio":
                     buffer.write(message["data"])
+                    full_audio_buffer.write(message["data"])
                     if buffer.tell() >= segment_duration_ms * 16:
                         buffer.seek(0)
                         audio_segment = AudioSegment.from_file(buffer, format="mp3")
@@ -41,7 +43,8 @@ class PlaySound:
             
             buffer.seek(0)
             audio_segment = AudioSegment.from_file(buffer, format="mp3")
-            
+            with open("temp.mp3", "wb") as f:
+                f.write(full_audio_buffer.getvalue())
             if stream is None:
                 stream = p.open(
                     format=p.get_format_from_width(audio_segment.sample_width),
