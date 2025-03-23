@@ -1,8 +1,9 @@
 import re
 import logging
+from typing import Optional
 
 
-def word_to_sub(text, logger: logging.Logger):
+def word_to_sub(text, logger: Optional[logging.Logger] = logging.Logger("temp_word_to_sub_logger")):
     is_chinese = False
     if re.search(u'[\u4e00-\u9fff]', text):
         is_chinese = True

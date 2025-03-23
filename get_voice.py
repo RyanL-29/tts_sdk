@@ -1,19 +1,17 @@
 import edge_tts
 import logging
-from typing import Generator, Dict, Any, Union
+from typing import Generator, Dict, Any, Union, AsyncGenerator, Optional
+from edge_tts.typing import TTSChunk
 
 
 class GetVoice:
-    def __init__(self, logger: logging.Logger):
-        self.logger = logger
-    
-    def checkVoiceAvailable(self, voice) -> bool: 
-        if voice in self.voice_list:
-            return True
+    def __init__(self, logger: Optional[logging.Logger] = None):
+        if not logger:
+            self.logger = logging.Logger('temp_getvoice_logger')
         else:
-            return False
+            self.logger = logger
         
-    def getVoiceClip(self, voice, text) -> Union[bool,  Generator[Dict[str, Any], None, None]]: 
+    def getVoiceClip(self, voice, text) -> Union[bool, Generator[TTSChunk, None, None]]: 
         rate = "+0%"
         pitch = "+0Hz"
         if voice == "zh-HK-HiuGaaiNeural":
@@ -23,7 +21,6 @@ class GetVoice:
             pitch = "-2Hz"
         if isinstance(text, str) and len(text) > 0:
             try:
-                # edge_tts.Communicate(text=text, voice=voice, rate=rate, pitch=pitch).save_sync("./tts_out.mp3")
                 voice_clips = edge_tts.Communicate(text=text, voice=voice, rate=rate, pitch=pitch).stream_sync()
                 self.logger.info(f"Get voice clip success: {text}")
                 return voice_clips

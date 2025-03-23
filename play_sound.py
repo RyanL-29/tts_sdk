@@ -5,6 +5,7 @@ from pydub import AudioSegment
 import pydub
 import pyaudio
 import pydub.utils
+from edge_tts.typing import TTSChunk
         
 class PlaySound:
     def __init__(self, logger: Logger) -> None:
@@ -14,7 +15,7 @@ class PlaySound:
         AudioSegment.ffmpeg = "./lib/bin/ffmpeg.exe"
         pydub.utils.get_prober_name = lambda : "./lib/bin/ffprobe.exe"
     
-    def play_stream(self, voice_clips: Generator[Dict[str, Any], None, None]):
+    def play_stream(self, voice_clips: Generator[TTSChunk, None, None]):
         buffer = io.BytesIO()
         full_audio_buffer = io.BytesIO()
         segment_duration_ms = 3000
@@ -23,9 +24,10 @@ class PlaySound:
         try:
             self.logger.info("Voice stream started. Start playing sound")
             for message in voice_clips:
-                if message["type"] == "audio":
-                    buffer.write(message["data"])
-                    full_audio_buffer.write(message["data"])
+                messagetype, data = message.get("type"), message.get("data")
+                if messagetype == "audio" and data:
+                    buffer.write(data)
+                    full_audio_buffer.write(data)
                     if buffer.tell() >= segment_duration_ms * 16:
                         buffer.seek(0)
                         audio_segment = AudioSegment.from_file(buffer, format="mp3")
